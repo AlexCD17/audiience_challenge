@@ -18,6 +18,7 @@ func verifyMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 		stateRegex := "^[A-Z]{2}$"
 		validTypes := []string{"normal", "premium"}
+		validStates := []string{"NY", "TX", "OH", "AZ", "CA"}
 
 		log.Println("Verifying params...")
 
@@ -34,6 +35,12 @@ func verifyMiddleware(next http.Handler) http.Handler {
 		if !match {
 			writer.WriteHeader(http.StatusBadRequest)
 			_ = json.NewEncoder(writer).Encode(resources.WrongState)
+			return
+		}
+
+		if !slices.Contains(validStates, state) {
+			writer.WriteHeader(http.StatusBadRequest)
+			_ = json.NewEncoder(writer).Encode(resources.UnsupportedState)
 			return
 		}
 

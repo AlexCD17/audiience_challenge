@@ -3,6 +3,7 @@ package resources
 const (
 	MissingState      = "missing estimation type, type is required"
 	WrongState        = "wrong state format, it should be uppercase and two letters"
+	UnsupportedState  = "Unsupported state"
 	MissingDistance   = "missing distance, distance in km is required"
 	WrongDistance     = "wrong distance, distance should be a real number"
 	MissingType       = "missing estimation type, type is required"
