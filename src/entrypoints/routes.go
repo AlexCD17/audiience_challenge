@@ -14,13 +14,15 @@ type Server struct {
 }
 
 func (s *Server) SetupRouter() {
+	log.Println("Setting up router...")
 	s.router.Use(ipValidatorMiddleware)
 	s.router.Use(verifyMiddleware)
 	s.router.Methods("Get").Path("/estimate").HandlerFunc(s.GetEstimate)
+	log.Println("Ready: ")
 }
 
 func NewServer(estimateServices services.IService, router *mux.Router) *Server {
-	log.Println("creating server")
+	log.Println("Creating server...")
 	return &Server{
 		estimate: estimateServices,
 		router:   router,

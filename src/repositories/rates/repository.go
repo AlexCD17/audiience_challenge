@@ -29,8 +29,6 @@ func (r *Repository) GetRates(state, estimationType string) (rate float32, err e
 		log.Fatal(err)
 	}
 
-	log.Println(rate)
-
 	err = nil
 	return
 

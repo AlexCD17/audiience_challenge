@@ -17,7 +17,7 @@ func TestEstimateService_Estimate(t *testing.T) {
 	tests := []struct {
 		name         string
 		args         args
-		repoResponse float32
+		repoResponse float32 // hardcoded value for repo mock response
 		want         float32
 	}{
 		{

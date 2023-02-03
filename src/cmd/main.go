@@ -14,6 +14,7 @@ import (
 
 func main() {
 
+	// DB initialization
 	db, err := sql.Open("sqlite3", "./resources/rates.db")
 
 	if err != nil {
@@ -26,6 +27,7 @@ func main() {
 		}
 	}(db)
 
+	// Dependency injection starts
 	repo := rates.NewRepository(db)
 	estimateService := services.NewEstimateService(repo)
 	router := mux.NewRouter().StrictSlash(true)

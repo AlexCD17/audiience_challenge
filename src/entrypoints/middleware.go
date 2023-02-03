@@ -19,7 +19,7 @@ func verifyMiddleware(next http.Handler) http.Handler {
 		stateRegex := "^[A-Z]{2}$"
 		validTypes := []string{"normal", "premium"}
 
-		log.Println("Middle")
+		log.Println("Verifying params...")
 
 		state := request.URL.Query().Get("state")
 
@@ -86,6 +86,8 @@ func verifyMiddleware(next http.Handler) http.Handler {
 // ipValidatorMiddleware checks for the ip-client header and validates value is either ipv4 or ipv6
 func ipValidatorMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+		log.Println("Looking for valid IP...")
+
 		//Get IP from the ip-client header
 		ip := request.Header.Get("ip-client")
 		netIP := net.ParseIP(ip)
