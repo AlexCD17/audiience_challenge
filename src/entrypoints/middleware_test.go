@@ -57,6 +57,20 @@ func TestMiddleware_VerifyMiddleware(t *testing.T) {
 			wantBody:   resources.WrongState,
 		},
 		{
+			name: "failed estimation, unsupported state",
+			args: args{
+				w: httptest.NewRecorder(),
+				r: httptest.NewRequest(
+					http.MethodGet,
+					"http://0.0.0.0/estimate?state=DS&type=premium&distance=23&base_amount=345",
+					strings.NewReader(""),
+				),
+			},
+			wantStatus: http.StatusBadRequest,
+			wantHeader: http.Header{"Content-Type": {"application/json"}},
+			wantBody:   resources.UnsupportedState,
+		},
+		{
 			name: "failed estimation, missing distance",
 			args: args{
 				w: httptest.NewRecorder(),
